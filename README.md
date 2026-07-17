@@ -40,58 +40,44 @@ Its responsibilities included:
 - Handling emergency-stop and safety behavior
 Separating the servo-control logic from the high-level processing allowed the STM32 to focus on consistent and responsive motor commands.
 
-# Control Flow:
-Joystick and Button Inputs
-            ↓
-            
-ESP32 Remote Controller
+# System Control Flow:
+<p align="center">
+  <strong>Joystick and Button Inputs</strong><br>
+  ↓<br>
+  <strong>ESP32 Remote Controller</strong><br>
+  ↓<br>
+  <strong>Wireless Communication</strong><br>
+  ↓<br>
+  <strong>NVIDIA Jetson Nano</strong><br>
+  ↓<br>
+  <strong>Inverse-Kinematics Solver</strong><br>
+  ↓<br>
+  <strong>Joint-Angle Commands</strong><br>
+  ↓<br>
+  <strong>STM32 Motor Controller</strong><br>
+  ↓<br>
+  <strong>PWM Servo Commands</strong><br>
+  ↓<br>
+  <strong>7-DoF Robotic Arm</strong>
+</p>
 
-            ↓
-            
-Wireless Command Transmission
+# System Control Flow:
 
-            ↓
-            
-NVIDIA Jetson Nano
+<p align="center">
+  <strong>Camera Input</strong><br>
+  ↓<br>
+  <strong>AprilTag Detection</strong><br>
+  ↓<br>
+  <strong>Object or Target Position</strong><br>
+  ↓<br>
+  <strong>Inverse-Kinematics Solver</strong><br>
+  ↓<br>
+  <strong>Joint-Angle Commands</strong><br>
+  ↓<br>
+  <strong>STM32 Servo Control</strong>
+</p>
 
-            ↓
-            
-Cartesian XYZ Target
-
-            ↓
-            
-Inverse-Kinematics Solver
-
-            ↓
-            
-Joint-Angle Commands
-
-            ↓
-            
-STM32 Motor Controller
-
-            ↓
-            
-PWM Servo Commands
-
-            ↓
-            
-7-DoF Robotic-Arm Movement
-
-For computer-vision-assisted operation, the control path was:
-Camera Input
-     ↓
-AprilTag Detection
-     ↓
-Object or Target Position
-     ↓
-Inverse-Kinematics Solver
-     ↓
-Joint-Angle Commands
-     ↓
-STM32 Servo Control
-
-Communication System:
+# Communication System
 A structured communication method was used to transfer commands between the different processors.
 Controller packets included information such as:
 - Packet header
@@ -103,7 +89,7 @@ Controller packets included information such as:
 The receiving program parsed the incoming data and rejected incomplete or invalid commands. This provided a more reliable method of communication than sending individual unstructured values.
 The Jetson Nano also transmitted calculated joint-angle targets to the STM32, where they were converted into servo commands.
 
-Inverse Kinematics:
+# Inverse Kinematics
 The inverse-kinematics algorithm ran on the Jetson Nano and translated Cartesian XYZ commands into joint-angle targets for the robotic arm.
 The IK control process included:
 - Reading the current joint configuration
@@ -115,7 +101,7 @@ The IK control process included:
 - Sending the calculated angles to the STM32
 A damped least-squares approach was used to improve the behavior of the solver near singular configurations. The algorithm allowed several joints to move together rather than commanding each joint independently.
 
-Servo Control:
+# Servo Control
 The STM32 generated PWM commands for the robotic-arm servos based on the joint-angle values received from the Jetson Nano.
 Servo-control development included:
 - Individually calibrating each servo
@@ -127,11 +113,11 @@ Servo-control development included:
 - Testing calculated IK angles before applying them to the arm
 These calibration and safety limits were necessary because each servo and mechanical joint had a different usable motion range.
 
-Computer Vision:
+# Computer Vision
 The Jetson Nano was also used for the computer-vision subsystem. AprilTags were used to identify and localize targets within the camera view.
 The detected target position could be converted into a Cartesian command and passed to the inverse-kinematics solver. This supported assisted object targeting and reduced the amount of manual joint control required from the user.
 
-Accessible Remote Controller:
+# Accessible Remote Controller
 The remote controller was designed with accessibility as a primary requirement.
 The interface included:
 - A large joystick
@@ -142,7 +128,7 @@ The interface included:
 - Emergency-stop functionality
 The controller enclosure was designed and adjusted based on the dimensions of the physical components and printed circuit board.
 
-Safety Features:
+# Safety Features:
 The system incorporated several software and hardware safety features:
 - Joint-angle limits
 - Servo command limits
@@ -154,7 +140,7 @@ The system incorporated several software and hardware safety features:
 - Servo calibration constraints
 These features helped prevent the arm from moving beyond its mechanical range or responding to incomplete commands.
 
-Technologies Used:
+# Technologies Used:
 - C and C++
 - Python
 - NVIDIA Jetson Nano
@@ -172,7 +158,7 @@ Technologies Used:
 - STM32Cube
 - Git and GitHub
 
-My Contributions:
+# My Contributions:
 I served as the Embedded Systems Lead for the project. My primary contributions included:
 - Developing the ESP32 remote-controller firmware
 - Reading and processing joystick and button inputs
@@ -189,7 +175,7 @@ I served as the Embedded Systems Lead for the project. My primary contributions 
 - Supporting embedded, mechanical, and computer-vision integration
 - Designing and testing the accessible remote-controller enclosure
 
-Project Results:
+# Project Results:
 The completed system demonstrated:
 - Wireless joystick and button control
 - Communication between the ESP32, Jetson Nano, and STM32
