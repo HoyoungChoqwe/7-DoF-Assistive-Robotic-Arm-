@@ -42,23 +42,41 @@ Separating the servo-control logic from the high-level processing allowed the ST
 
 # Control Flow:
 Joystick and Button Inputs
+
             ↓
+            
 ESP32 Remote Controller
+
             ↓
+            
 Wireless Command Transmission
+
             ↓
+            
 NVIDIA Jetson Nano
+
             ↓
+            
 Cartesian XYZ Target
+
             ↓
+            
 Inverse-Kinematics Solver
+
             ↓
+            
 Joint-Angle Commands
+
             ↓
+            
 STM32 Motor Controller
+
             ↓
+            
 PWM Servo Commands
+
             ↓
+            
 7-DoF Robotic-Arm Movement
 
 For computer-vision-assisted operation, the control path was:
