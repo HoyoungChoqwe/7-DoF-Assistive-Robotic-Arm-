@@ -40,7 +40,7 @@ Its responsibilities included:
 - Handling emergency-stop and safety behavior
 Separating the servo-control logic from the high-level processing allowed the STM32 to focus on consistent and responsive motor commands.
 
-Control Flow:
+# Control Flow:
 Joystick and Button Inputs
             ↓
 ESP32 Remote Controller
