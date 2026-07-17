@@ -3,8 +3,8 @@ Project Overview:
 This project is a 7-degree-of-freedom assistive robotic arm designed to help users with limited upper-limb mobility perform remote pick-and-place tasks. The system combines an accessible wireless controller, inverse kinematics, computer vision, and embedded servo control.
 The project was developed using a distributed architecture consisting of an ESP32 remote controller, an NVIDIA Jetson Nano, and an STM32 microcontroller. Each processor was assigned a specific role based on its processing capabilities and real-time requirements.
 
-System Architecture:
-#ESP32 Remote Controller
+#System Architecture:
+ESP32 Remote Controller
 The ESP32 was used as the main user-input device. It collected commands from the joystick and control buttons and transmitted them wirelessly to the robotic-arm system.
 The controller handled:
 - Joystick input
