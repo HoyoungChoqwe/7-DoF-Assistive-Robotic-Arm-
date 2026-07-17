@@ -42,9 +42,7 @@ Separating the servo-control logic from the high-level processing allowed the ST
 
 # Control Flow:
 Joystick and Button Inputs
-
             ↓
-            
 ESP32 Remote Controller
             ↓
 Wireless Command Transmission
